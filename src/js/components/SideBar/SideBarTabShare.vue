@@ -23,7 +23,7 @@
 <template>
 	<div>
 		<ConfigBox v-if="!isOwner" :title="t('polls', 'As an admin you may edit this poll')" icon-class="icon-checkmark" />
-		<SharesEffective />
+		<SharesEffective v-if="poll.anonymous == 0" />
 		<ConfigBox :title="t('polls', 'Add Shares')" icon-class="icon-add">
 			<UserSearch />
 		</ConfigBox>
@@ -54,6 +54,7 @@ export default {
 	computed: {
 		...mapState({
 			isOwner: (state) => state.poll.acl.isOwner,
+			poll: (state) => state.poll,
 		}),
 	},
 
