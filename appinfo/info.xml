@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>polls</id>
+    <name>Polls</name>
+    <summary>A polls app, similar to doodle/dudle with the possibility to restrict access.</summary>
+    <description>A polls app, similar to doodle/dudle with the possibility to restrict access (members, certain groups/users, hidden and public).</description>
+    <version>3.0.0</version>
+    <licence>agpl</licence>
+    <author>Vinzenz Rosenkranz</author>
+    <author>René Gieling</author>
+    <author>Kai Schröer</author>
+    <documentation>
+        <admin>https://github.com/nextcloud/polls/blob/master/README.md</admin>
+    </documentation>
+    <category>tools</category>
+    <category>social</category>
+    <category>organization</category>
+    <website>https://github.com/nextcloud/polls</website>
+    <bugs>https://github.com/nextcloud/polls/issues</bugs>
+    <repository type="git">https://github.com/nextcloud/polls.git</repository>
+    <screenshot>https://raw.githubusercontent.com/nextcloud/polls/master/screenshots/overview.png</screenshot>
+    <screenshot>https://raw.githubusercontent.com/nextcloud/polls/master/screenshots/vote.png</screenshot>
+    <screenshot>https://raw.githubusercontent.com/nextcloud/polls/master/screenshots/edit-poll.png</screenshot>
+    <dependencies>
+        <php min-version="7.3"/>
+        <nextcloud min-version="21" max-version="22" />
+    </dependencies>
+	<background-jobs>
+		<job>OCA\Polls\Cron\NotificationCron</job>
+        <job>OCA\Polls\Cron\JanitorCron</job>
+	</background-jobs>
+	<commands>
+		<command>OCA\Polls\Command\Share\Add</command>
+		<command>OCA\Polls\Command\Share\Remove</command>
+	</commands>
+	<repair-steps>
+		<pre-migration>
+			<step>OCA\Polls\Migration\RemoveIndices</step>
+			<step>OCA\Polls\Migration\DeleteInvalidRecords</step>
+        </pre-migration>
+		<post-migration>
+			<step>OCA\Polls\Migration\CreateIndices</step>
+        </post-migration>
+    </repair-steps>
+	<navigations>
+        <navigation>
+            <name>Polls</name>
+            <route>polls.page.index</route>
+            <icon>app.svg</icon>
+            <order>77</order>
+        </navigation>
+    </navigations>
+</info>

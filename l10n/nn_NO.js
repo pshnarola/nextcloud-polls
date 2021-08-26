@@ -1,0 +1,28 @@
+OC.L10N.register(
+    "polls",
+    {
+    "Group" : "Gruppe",
+    "User" : "Bruker",
+    "New comment …" : "Ny kommentar...",
+    "Delete comment" : "Slett kommentar",
+    "Title" : "Tittel",
+    "Cancel" : "Avbryt",
+    "Apply" : "Anvend",
+    "Confirmed" : "Stadfesta",
+    "OK" : "OK",
+    "Week" : "Veke",
+    "never" : "aldri",
+    "Owner" : "Owner",
+    "Created" : "Lagd",
+    "Description" : "Skildring",
+    "No" : "Nei",
+    "Yes" : "Ja",
+    "Settings" : "Instillingar",
+    "Details" : "Detaljar",
+    "Configuration" : "Innstillingar",
+    "Shares" : "Delingar",
+    "Comments" : "Kommentarar",
+    "Day" : "Dag",
+    "Month" : "Månad"
+},
+"nplurals=2; plural=(n != 1);");

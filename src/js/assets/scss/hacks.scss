@@ -1,0 +1,13 @@
+// fill full input with background color
+.mx-input {
+	background-clip: initial !important;
+}
+
+.mx-datepicker-main svg {
+	fill: var(--color-primary-element);
+}
+
+// force scrolling of sidebar-tabs content
+.app-sidebar-tabs {
+	overflow-y: hidden;
+}

@@ -1,0 +1,46 @@
+{
+	"name": "nextcloud/polls",
+	"type": "project",
+	"license": "AGPLv3",
+	"authors": [
+		{
+			"name": "Vinzenz Rosenkranz"
+		},
+		{
+			"name": "Kai Schröer"
+		},
+		{
+			"name": "René Gieling"
+		}
+	],
+	"config": {
+      "platform": {
+        "php": "7.4.0"
+      }
+    },
+	"autoload-dev": {
+		"psr-4": {
+			"OCA\\Polls\\Tests\\": "tests/"
+		}
+	},
+	"require-dev": {
+		"christophwurst/nextcloud": "^21.0",
+		"phpunit/phpunit": "^9.5",
+		"friendsofphp/php-cs-fixer": "2.19.0",
+		"league/factory-muffin": "^3.0",
+		"league/factory-muffin-faker": "^2.0",
+		"nextcloud/coding-standard": "^0.5.0",
+		"vimeo/psalm": "^4.3"
+	},
+	"scripts": {
+		"cs:check": "php-cs-fixer fix --dry-run --diff",
+		"cs:fix": "php-cs-fixer fix",
+		"psalm": "php vendor/vimeo/psalm/psalm",
+		"psalm:fix": "php vendor/vimeo/psalm/psalm --alter --issues=InvalidReturnType,InvalidNullableReturnType,MismatchingDocblockParamType,MismatchingDocblockReturnType,MissingParamType,InvalidFalsableReturnType",
+		"psalm:info": "php vendor/vimeo/psalm/psalm --show-info=true"
+	},
+	"require": {
+		"league/commonmark": "^1.6",
+		"doctrine/dbal": "^3.1"
+	}
+}
