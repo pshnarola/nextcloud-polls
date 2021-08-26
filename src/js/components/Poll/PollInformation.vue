@@ -54,10 +54,10 @@
 			<div class="icon-polls-unconfirmed">
 				{{ n('polls', '%n option', '%n options', countOptions) }}
 			</div>
-			<div v-if="countAllYesVotes" class="icon-polls-yes">
+			<div v-if="poll.expire != 0 && poll.anonymous != 0 && countAllYesVotes"  class="icon-polls-yes">
 				{{ n('polls', '%n yes vote', '%n yes votes', countAllYesVotes) }}
 			</div>
-			<div v-if="countAllNoVotes" class="icon-polls-no">
+			<div v-if="poll.expire != 0 && poll.anonymous != 0 && countAllNoVotes" class="icon-polls-no">
 				{{ n('polls', '%n no vote', '%n no votes', countAllNoVotes) }}
 			</div>
 			<div v-if="countAllMaybeVotes" class="icon-polls-maybe">

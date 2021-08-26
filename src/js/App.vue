@@ -241,4 +241,8 @@ export default {
 	min-width: 320px;
 }
 
+.swal2-container {
+	z-index: 2000 !important;
+}
+
 </style>

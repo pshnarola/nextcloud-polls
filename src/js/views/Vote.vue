@@ -27,7 +27,7 @@
 			<div class="header-actions">
 				<PollInformation />
 				<ActionSortOptions />
-				<ActionChangeView />
+				<ActionChangeView v-if="poll.anonymous == 0" />
 				<ActionToggleSidebar v-if="acl.allowEdit || poll.allowComment" />
 			</div>
 		</div>
@@ -37,7 +37,7 @@
 		</div>
 
 		<div class="area__main" :class="viewMode">
-			<VoteTable v-show="options.length" :view-mode="viewMode" />
+			<VoteTable v-show="(options.length && poll.expire == 0 && !poll.acl.isOwner) || (options.length && poll.expire != 0 && poll.acl.isOwner)" :view-mode="viewMode" />
 
 			<EmptyContent v-if="!options.length" :icon="pollTypeIcon">
 				{{ t('polls', 'No vote options available') }}
@@ -51,20 +51,19 @@
 				</template>
 			</EmptyContent>
 		</div>
-
+		<div class="area__main list-view">
+			<button
+				v-if="options.length && poll.expire == 0 && !poll.acl.isOwner"
+				class="button primary btn-fit-content"
+				@click="onOdeslatclick">
+				Odeslat hlasy
+			</button>
+		</div>
 		<div v-if="countHiddenParticipants" class="area__footer">
 			<h2>
 				{{ t('polls', 'Due to performance concerns {countHiddenParticipants} voters are hidden.', { countHiddenParticipants }) }}
 			</h2>
 		</div>
-
-		<div v-if="poll.anonymous" class="area__footer">
-			<div>
-				{{ t('poll', 'Although participant\'s names are hidden, this is not a real anonymous poll because they are not hidden from the owner.') }}
-				{{ t('poll', 'Additionally the owner can remove the anonymous flag at any time, which will reveal the participant\'s names.') }}
-			</div>
-		</div>
-
 		<PublicRegisterModal v-if="showRegisterModal" />
 		<LoadingOverlay v-if="isLoading" />
 	</AppContent>
@@ -81,6 +80,7 @@ import PollTitle from '../components/Poll/PollTitle'
 import ActionSortOptions from '../components/Actions/ActionSortOptions'
 import ActionChangeView from '../components/Actions/ActionChangeView'
 import ActionToggleSidebar from '../components/Actions/ActionToggleSidebar'
+import Swal from 'sweetalert2'
 
 export default {
 	name: 'Vote',
@@ -144,6 +144,7 @@ export default {
 	},
 
 	created() {
+		console.debug('==>', this.poll)
 		// simulate @media:prefers-color-scheme until it is supported for logged in users
 		// This simulates the theme--dark
 		// TODO: remove, when completely supported by core
@@ -166,6 +167,24 @@ export default {
 	},
 
 	methods: {
+		onOdeslatclick() {
+			this.show = !this.show
+			Swal.fire({
+				title: 'Vase hlasy byly odeslany. Nyní prosím zavřete okno prohlížeče.',
+				confirmButtonText: 'OK',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					window.close()
+					return result.isConfirmed
+				} else if (result.isDenied) {
+					throw new Error(result.isDenied)
+				}
+				return null
+			}).catch(function(error) {
+				return error
+			})
+		},
+
 		openOptions() {
 			emit('toggle-sidebar', { open: true, activeTab: 'options' })
 		},
@@ -230,4 +249,7 @@ export default {
 	height: 44px;
 }
 
+.btn-fit-content {
+	width: fit-content;
+}
 </style>
