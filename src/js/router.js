@@ -46,7 +46,7 @@ export default new Router({
 			redirect: {
 				name: 'list',
 				params: {
-					type: 'relevant',
+					type: 'all',
 				},
 			},
 		},
