@@ -29,46 +29,7 @@ import { generateUrl } from '@nextcloud/router'
 const state = {
 	list: [],
 	categories: [
-		{
-			id: 'relevant',
-			title: t('polls', 'Relevant'),
-			titleExt: t('polls', 'Relevant polls'),
-			description: t('polls', 'All polls which are relevant or important to you, because you are a participant or the owner or you are invited to. Without polls closed more than five days ago.'),
-			icon: 'icon-details',
-			pinned: false,
-		},
-		{
-			id: 'my',
-			title: t('polls', 'My polls'),
-			titleExt: t('polls', 'My polls'),
-			description: t('polls', 'Your polls (in which you are the owner).'),
-			icon: 'icon-user',
-			pinned: false,
-		},
-		{
-			id: 'hidden',
-			title: t('polls', 'Hidden polls'),
-			titleExt: t('polls', 'Hidden polls'),
-			description: t('polls', 'All hidden polls, to which you have access.'),
-			icon: 'icon-polls-hidden-poll',
-			pinned: false,
-		},
-		{
-			id: 'participated',
-			title: t('polls', 'Participated'),
-			titleExt: t('polls', 'Participated'),
-			description: t('polls', 'All polls, where you placed a vote.'),
-			icon: 'icon-polls-confirmed',
-			pinned: false,
-		},
-		{
-			id: 'public',
-			title: t('polls', 'Public polls'),
-			titleExt: t('polls', 'Public polls'),
-			description: t('polls', 'A complete list with all public polls on this site, regardless who is the owner.'),
-			icon: 'icon-link',
-			pinned: false,
-		},
+
 		{
 			id: 'all',
 			title: t('polls', 'All polls'),
